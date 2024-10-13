@@ -79,4 +79,16 @@ public class UserService {
         tokenRepository.save(token1);
         return;
     }
+
+    public User validateToken(String value) {
+        Optional<Token> tokenOptional = tokenRepository.
+                findByValueAndIsDeletedAndExpiryAtGreaterThan(value, false, new Date());
+
+        if (tokenOptional.isEmpty()) {
+//            TODO: TokenDoesNotExistOrAlreadyExpiredException
+            return null;
+        }
+
+        return tokenOptional.get().getUser();
+    }
 }
