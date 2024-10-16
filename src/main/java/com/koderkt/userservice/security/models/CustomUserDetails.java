@@ -3,6 +3,8 @@ package com.koderkt.userservice.security.models;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.koderkt.userservice.models.Role;
 import com.koderkt.userservice.models.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,19 +23,22 @@ public class CustomUserDetails implements UserDetails {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-    //    private Long userId;
+    @Getter
+    @Setter
+    private Long userId;
+
     public CustomUserDetails() {
     }
 
     public CustomUserDetails(User user) {
-        //        this.user = user;
+        //            this.user = user;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.enabled = true;
         this.credentialsNonExpired = true;
         this.password = user.getHashedPassword();
         this.username = user.getEmail();
-        //        this.userId = user.getId();
+        this.userId = user.getId();
 
         List<CustomGrantedAuthority> grantedAuthorities = new ArrayList<>();
 
@@ -44,17 +49,13 @@ public class CustomUserDetails implements UserDetails {
         this.authorities = grantedAuthorities;
     }
 
-//    public Long getUserId() {
-//        return userId;
-//    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<CustomGrantedAuthority> grantedAuthorities = new ArrayList<>();
-//
-//        for (Role role: user.getRoles() ){
-//            grantedAuthorities.add(new CustomGrantedAuthority(role));
-//        }
+        //        List<CustomGrantedAuthority> grantedAuthorities = new ArrayList<>();
+        //
+        //        for (Role role: user.getRoles() ){
+        //            grantedAuthorities.add(new CustomGrantedAuthority(role));
+        //        }
         return authorities;
     }
 
