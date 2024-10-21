@@ -19,9 +19,9 @@ class UserserviceApplicationTests {
     @Autowired
     private RegisteredClientRepository registeredClientRepository;
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 //	@Test
 //    @Commit

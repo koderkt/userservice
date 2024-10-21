@@ -20,6 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/")
+    public String hello(){
+        return "Hello toxic";
+    }
     @PostMapping("/signup")
     public UserDto signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
         return UserDto.from(userService.signUp(
